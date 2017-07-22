@@ -1,11 +1,11 @@
 # frozen_string_literal: true
+
 source 'http://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.4.1'
 
 gem 'fixer'
 gem 'kgio'
-gem 'newrelic_rpm'
 gem 'oj'
 gem 'rack-cors'
 gem 'rake'

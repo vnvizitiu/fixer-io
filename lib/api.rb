@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'oj'
 require 'sinatra'
 require 'rack/cors'
@@ -16,7 +17,6 @@ configure :development do
 end
 
 configure :production do
-  require 'newrelic_rpm'
   disable :dump_errors
 end
 
@@ -52,8 +52,7 @@ get '*' do
 end
 
 get '/' do
-  etag App.version
-  jsonp details: 'http://fixer.io', version: App.version
+  jsonp details: 'http://fixer.io'
 end
 
 get '/latest' do
@@ -61,7 +60,7 @@ get '/latest' do
   jsonp quote.to_h
 end
 
-get(/(?<date>\d{4}-\d{2}-\d{2})/) do
+get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
   last_modified quote.date
   jsonp quote.to_h
 end
